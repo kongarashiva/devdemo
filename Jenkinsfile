@@ -1,7 +1,7 @@
 pipeline {
 agent any
 environment {
-IMAGE = "/react-app:${BUILD_NUMBER}"
+IMAGE = "kongarashiva/react-app:${BUILD_NUMBER}"
 }
 stages {
 stage('Build Docker Image') {
