@@ -36,13 +36,13 @@ stage('Deploy To Dev') {
 steps {
 sh '''
 ssh ec2-user@52.66.190.156  "
-docker pull $IMAGE
+docker pull kongarashiva/react-app:${BUILD_NUMBER}
 docker stop react-app || true
 docker rm react-app || true
 docker run -d \
 --name react-app \
 -p 3000:3000 \
-$IMAGE
+kongarashiva/react-app:${BUILD_NUMBER}
 "
 '''
 }
