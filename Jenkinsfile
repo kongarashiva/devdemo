@@ -41,7 +41,7 @@ docker stop react-app || true
 docker rm react-app || true
 docker run -d --name react-app -p 3000:3000 kongarashiva/react-app:${BUILD_NUMBER}
 '
-"""
+""""
 }
 }
 }
