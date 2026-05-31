@@ -1,6 +1,13 @@
 
 pipeline {
 agent any
+parameters {
+string(
+name: 'ROLLBACK_VERSION',
+defaultValue: '',
+description: 'Enter Docker image version to rollback'
+)
+}
 environment {
 IMAGE = "kongarashiva/react-app:${BUILD_NUMBER}"
 }
