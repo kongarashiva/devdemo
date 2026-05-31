@@ -1,12 +1,14 @@
+
 pipeline {
 agent any
 environment {
-IMAGE = "kongarashiva/react-app:${BUILD_NUMBER}
+IMAGE = "kongarashiva/react-app:${BUILD_NUMBER}"
 }
 stages {
 stage('Build Docker Image') {
 steps {
 sh 'docker build -t react-app .'
+}
 }
 stage('Docker Login') {
 steps {
@@ -22,7 +24,7 @@ echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 '''
 }
 }
-} 
+}
 stage('Push Image') {
 steps {
 sh '''
@@ -45,3 +47,5 @@ docker run -d --name react-app -p 3000:3000 kongarashiva/react-app:${BUILD_NUMBE
 }
 }
 }
+
+
