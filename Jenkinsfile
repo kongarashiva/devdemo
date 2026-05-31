@@ -1,4 +1,3 @@
-
 pipeline {
 agent any
 parameters {
@@ -50,6 +49,23 @@ docker rm react-app || true
 docker run -d --name react-app -p 3000:3000 kongarashiva/react-app:${BUILD_NUMBER}
 "
 '''
+}
+}
+stage('Rollback') {
+when {
+expression {
+params.ROLLBACK_VERSION?.trim()
+}
+}
+steps {
+sh """
+ssh -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no ec2-user@52.66.190.156 '
+docker stop react-app || true
+docker rm react-app || true
+docker pull kongarashiva/react-app:${ROLLBACK_VERSION}
+docker run -d --name react-app -p 3000:3000 kongarashiva/react-app:${ROLLBACK_VERSION}
+'
+"""
 }
 }
 }
