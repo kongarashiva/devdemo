@@ -54,12 +54,12 @@ docker run -d --name react-app -p 3000:3000 kongarashiva/react-app:${BUILD_NUMBE
 stage('Deploy To Production') {
 steps {
 sh '''
-ssh -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no ec2-user@43.204.228.145 '
+ssh -i /var/lib/jenkins/.ssh/id_rsa ec2-user@43.204.228.145 "
 docker pull kongarashiva/react-app:${BUILD_NUMBER}
 docker stop react-app || true
 docker rm react-app || true
 docker run -d --name react-app -p 3000:3000 kongarashiva/react-app:${BUILD_NUMBER}
-'
+"
 '''
 }
 }
