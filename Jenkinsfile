@@ -51,6 +51,11 @@ docker run -d --name react-app -p 3000:3000 kongarashiva/react-app:${BUILD_NUMBE
 '''
 }
 }
+stage('Approval') {
+steps {
+input message: 'Deploy to Production?', ok: 'Proceed'
+}
+}
 stage('Deploy To Production') {
 steps {
 sh '''
