@@ -59,7 +59,7 @@ input message: 'Deploy to Production?', ok: 'Proceed'
 stage('Deploy To Production') {
 steps {
 sh '''
-ssh -i /var/lib/jenkins/.ssh/id_rsa ec2-user@13.235.75.30 "
+ssh -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no ec2-user@13.235.75.30 "
 docker pull kongarashiva/react-app:${BUILD_NUMBER}
 docker stop react-app || true
 docker rm react-app || true
