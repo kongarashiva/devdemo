@@ -76,7 +76,7 @@ params.ROLLBACK_VERSION?.trim()
 }
 steps {
 sh """
-ssh -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no ec2-user@52.66.190.156 '
+ssh -i /var/lib/jenkins/.ssh/id_rsa -o StrictHostKeyChecking=no ec2-user@15.206.186.215 '
 docker stop react-app || true
 docker rm react-app || true
 docker pull kongarashiva/react-app:${ROLLBACK_VERSION}
