@@ -68,6 +68,22 @@ docker run -d --name react-app -p 3000:3000 kongarashiva/react-app:${BUILD_NUMBE
 '''
 }
 }
+post {
+success {
+emailext(
+to: 'shivakongara91@gmail.com',
+subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+body: "Build completed successfully."
+)
+}
+failure {
+emailext(
+to: 'shivakongara91@gmail.com',
+subject: "FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+body: "Build failed. Check Jenkins console output."
+)
+}
+}
 stage('Rollback') {
 when {
 expression {
